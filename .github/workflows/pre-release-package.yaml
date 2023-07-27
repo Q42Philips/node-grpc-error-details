@@ -24,8 +24,8 @@ jobs:
         run: npm version ${{ github.event.release.tag_name }}-beta --allow-same-version true --git-tag-version false
       
       - name: publish beta
-        if: github.event.release.prerelease == false
-        run: npm publish 
+        if: github.event.release.prerelease == true
+        run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
