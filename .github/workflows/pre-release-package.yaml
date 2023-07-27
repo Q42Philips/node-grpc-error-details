@@ -1,0 +1,41 @@
+name: Publish pre-release package to GitHub Packages
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://npm.pkg.github.com'
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      # beta release
+      - name: pre-release version 
+        if: github.event.release.prerelease == true
+        run: npm version ${{ github.event.release.tag_name }}-beta --allow-same-version true --git-tag-version false
+      
+      - name: publish beta
+        if: github.event.release.prerelease == false
+        run: npm publish 
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # full release
+      - name: relese version 
+        if: github.event.release.prerelease == false
+        run: npm version ${{ github.event.release.tag_name }} --allow-same-version true --git-tag-version false
+      
+      - name: publish release
+        if: github.event.release.prerelease == false
+        run: npm publish 
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

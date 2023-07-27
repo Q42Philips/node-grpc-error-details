@@ -1,0 +1,40 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>Q42Philips/alexandria"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true,
+      "appendLabels": [
+        "patch"
+      ]
+    },
+    {
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "automerge": true,
+      "appendLabels": [
+        "minor"
+      ]
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": true,
+      "appendLabels": [
+        "major"
+      ]
+    }
+  ],
+  "rebaseWhen": "behind-base-branch",
+  "automergeStrategy": "fast-forward",
+  "automergeType": "pr"
+}
