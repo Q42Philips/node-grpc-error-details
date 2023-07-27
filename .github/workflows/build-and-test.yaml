@@ -1,31 +1,33 @@
 name: Build and test
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+    types: [ready_for_review]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '10', '12', '14', '16' ]
-    name: Run in node v${{ matrix.node }}
+        node: [ '14', '16', '18', '20' ]
+    name: Test / node v${{ matrix.node }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up node v${{ matrix.node }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with: 
           node-version: ${{ matrix.node }}
-
-      - name: Install global dependencies
-        run: yarn global add node-pre-gyp
+          cache-dependency-path: ./package-lock.json
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Run tests
-        run: yarn test
+        run: npm test
 
       - name: Build
-        run: yarn build        
+        run: npm run build        

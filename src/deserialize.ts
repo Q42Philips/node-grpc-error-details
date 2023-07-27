@@ -1,5 +1,5 @@
-import { Metadata } from "grpc";
-import { Status } from "./generated/status_pb";
+import { Metadata } from '@grpc/grpc-js';
+import { Status } from './generated/status_pb';
 import {
   RetryInfo,
   DebugInfo,
@@ -10,29 +10,27 @@ import {
   ResourceInfo,
   Help,
   LocalizedMessage,
-  ErrorInfo
-} from "./generated/error_details_pb";
+  ErrorInfo,
+} from './generated/error_details_pb';
 
 export const googleDeserializeMap = {
-  "google.rpc.RetryInfo": RetryInfo.deserializeBinary,
-  "google.rpc.DebugInfo": DebugInfo.deserializeBinary,
-  "google.rpc.QuotaFailure": QuotaFailure.deserializeBinary,
-  "google.rpc.PreconditionFailure": PreconditionFailure.deserializeBinary,
-  "google.rpc.BadRequest": BadRequest.deserializeBinary,
-  "google.rpc.RequestInfo": RequestInfo.deserializeBinary,
-  "google.rpc.ResourceInfo": ResourceInfo.deserializeBinary,
-  "google.rpc.Help": Help.deserializeBinary,
-  "google.rpc.LocalizedMessage": LocalizedMessage.deserializeBinary,
-  "google.rpc.ErrorInfo": ErrorInfo.deserializeBinary
+  'google.rpc.RetryInfo': RetryInfo.deserializeBinary,
+  'google.rpc.DebugInfo': DebugInfo.deserializeBinary,
+  'google.rpc.QuotaFailure': QuotaFailure.deserializeBinary,
+  'google.rpc.PreconditionFailure': PreconditionFailure.deserializeBinary,
+  'google.rpc.BadRequest': BadRequest.deserializeBinary,
+  'google.rpc.RequestInfo': RequestInfo.deserializeBinary,
+  'google.rpc.ResourceInfo': ResourceInfo.deserializeBinary,
+  'google.rpc.Help': Help.deserializeBinary,
+  'google.rpc.LocalizedMessage': LocalizedMessage.deserializeBinary,
+  'google.rpc.ErrorInfo': ErrorInfo.deserializeBinary,
 };
 
 interface ServiceError {
   metadata?: Metadata;
 }
 
-export function deserializeGrpcStatusDetails<
-  TMap extends Record<string, (bytes: Uint8Array) => any>
->(
+export function deserializeGrpcStatusDetails<TMap extends Record<string, (bytes: Uint8Array) => any>>(
   error: ServiceError,
   deserializeMap: TMap
 ): {
@@ -43,9 +41,9 @@ export function deserializeGrpcStatusDetails<
     return null;
   }
 
-  const buffer = error.metadata.get("grpc-status-details-bin")[0];
+  const buffer = error.metadata.get('grpc-status-details-bin')[0];
 
-  if (!buffer || typeof buffer === "string") {
+  if (!buffer || typeof buffer === 'string') {
     return null;
   }
 
@@ -55,7 +53,7 @@ export function deserializeGrpcStatusDetails<
 
   const details: Array<ReturnType<TMap[keyof TMap]>> = status
     .getDetailsList()
-    .map(detail => {
+    .map((detail) => {
       const deserialize = deserializeMap[detail.getTypeName()];
       if (deserialize) {
         const message = detail.unpack(deserialize, detail.getTypeName());
@@ -68,7 +66,7 @@ export function deserializeGrpcStatusDetails<
 
   return {
     status,
-    details
+    details,
   };
 }
 
@@ -76,8 +74,6 @@ export function deserializeGoogleGrpcStatusDetails(error: ServiceError) {
   return deserializeGrpcStatusDetails(error, googleDeserializeMap);
 }
 
-const notEmpty = <TValue>(
-  value: TValue | null | undefined
-): value is TValue => {
+const notEmpty = <TValue>(value: TValue | null | undefined): value is TValue => {
   return value !== null && value !== undefined;
 };
