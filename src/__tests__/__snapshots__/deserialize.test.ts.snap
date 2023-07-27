@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deserialize deserializeGoogleGrpcStatusDetails deserializes grpc-status-details-bin with default google rpc error details with badRequest 1`] = `
+[
+  "status",
+  "details",
+]
+`;
+
+exports[`deserialize deserializeGoogleGrpcStatusDetails deserializes grpc-status-details-bin with default google rpc error details with badRequest 2`] = `
+{
+  "details": [
+    {
+      "fieldViolationsList": [
+        {
+          "description": "field1 is not valid",
+          "field": "field1",
+        },
+        {
+          "description": "field2 is not valid",
+          "field": "field2",
+        },
+      ],
+    },
+    {
+      "description": "Resource Info Description",
+      "owner": "Owner",
+      "resourceName": "resourceName",
+      "resourceType": "resourceType",
+    },
+  ],
+  "status": {
+    "code": 3,
+    "detailsList": [
+      {
+        "typeUrl": "type.googleapis.com/google.rpc.BadRequest",
+        "value": "Ch0KBmZpZWxkMRITZmllbGQxIGlzIG5vdCB2YWxpZAodCgZmaWVsZDISE2ZpZWxkMiBpcyBub3QgdmFsaWQ=",
+      },
+      {
+        "typeUrl": "type.googleapis.com/google.rpc.ResourceInfo",
+        "value": "CgxyZXNvdXJjZVR5cGUSDHJlc291cmNlTmFtZRoFT3duZXIiGVJlc291cmNlIEluZm8gRGVzY3JpcHRpb24=",
+      },
+    ],
+    "message": "INVALID_ARGUMENT: value is invalid",
+  },
+}
+`;
+
+exports[`deserialize deserializeGoogleGrpcStatusDetails deserializes grpc-status-details-bin with default google rpc error details with errorInfo 1`] = `
+[
+  "status",
+  "details",
+]
+`;
+
+exports[`deserialize deserializeGoogleGrpcStatusDetails deserializes grpc-status-details-bin with default google rpc error details with errorInfo 2`] = `
+{
+  "details": [
+    {
+      "domain": "domain",
+      "metadataMap": [
+        [
+          "key",
+          "value",
+        ],
+      ],
+      "reason": "reason",
+    },
+    {
+      "description": "Resource Info Description",
+      "owner": "Owner",
+      "resourceName": "resourceName",
+      "resourceType": "resourceType",
+    },
+  ],
+  "status": {
+    "code": 5,
+    "detailsList": [
+      {
+        "typeUrl": "type.googleapis.com/google.rpc.ErrorInfo",
+        "value": "CgZyZWFzb24SBmRvbWFpbhoMCgNrZXkSBXZhbHVl",
+      },
+      {
+        "typeUrl": "type.googleapis.com/google.rpc.ResourceInfo",
+        "value": "CgxyZXNvdXJjZVR5cGUSDHJlc291cmNlTmFtZRoFT3duZXIiGVJlc291cmNlIEluZm8gRGVzY3JpcHRpb24=",
+      },
+    ],
+    "message": "NOT_FOUND: value is not found",
+  },
+}
+`;
+
+exports[`deserialize deserializeGrpcStatusDetails deserializes grpc-status-details-bin with custom rpc error details 1`] = `
+[
+  "status",
+  "details",
+]
+`;
+
+exports[`deserialize deserializeGrpcStatusDetails deserializes grpc-status-details-bin with custom rpc error details 2`] = `
+{
+  "details": [
+    {
+      "fieldViolationsList": [
+        {
+          "description": "field1 is not valid",
+          "field": "field1",
+        },
+        {
+          "description": "field2 is not valid",
+          "field": "field2",
+        },
+      ],
+    },
+    {
+      "description": "Resource Info Description",
+      "owner": "Owner",
+      "resourceName": "resourceName",
+      "resourceType": "resourceType",
+    },
+  ],
+  "status": {
+    "code": 3,
+    "detailsList": [
+      {
+        "typeUrl": "type.googleapis.com/google.rpc.BadRequest",
+        "value": "Ch0KBmZpZWxkMRITZmllbGQxIGlzIG5vdCB2YWxpZAodCgZmaWVsZDISE2ZpZWxkMiBpcyBub3QgdmFsaWQ=",
+      },
+      {
+        "typeUrl": "type.googleapis.com/google.rpc.ResourceInfo",
+        "value": "CgxyZXNvdXJjZVR5cGUSDHJlc291cmNlTmFtZRoFT3duZXIiGVJlc291cmNlIEluZm8gRGVzY3JpcHRpb24=",
+      },
+    ],
+    "message": "INVALID_ARGUMENT: value is invalid",
+  },
+}
+`;
