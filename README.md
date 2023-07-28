@@ -1,6 +1,8 @@
 # node-grpc-error-details
 
 [![Build and test](https://github.com/Q42Philips/node-grpc-error-details/actions/workflows/build-and-test.yaml/badge.svg)](https://github.com/Q42Philips/node-grpc-error-details/actions/workflows/build-and-test.yaml)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/q42philips/node-grpc-error-details)
+
 
 Utility function for deserializing the `grpc-status-details-bin` metadata value when using the [grpc-js](https://github.com/grpc/grpc-node) package. Error details allow sending/receiving additional data along with an error. For instance, if a request sends invalid data, a gRPC server could send back a [BadRequest](./src/proto/error_details.proto#L119) message identifying the field and why it failed validation.
 
